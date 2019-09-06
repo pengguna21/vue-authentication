@@ -1,18 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="nav">
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <a @click="handleLogout()">Logout</a>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapActions } from 'vuex';
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+  methods: {
+    ...mapActions('auth', [
+      'logout'
+    ]),
+    handleLogout() {
+      this.logout()
+    }
+  },
 }
 </script>
 
